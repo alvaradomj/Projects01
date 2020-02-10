@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Notes.Models.Note>
+@{
+    ViewData["Title"] = "Index";
+}
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<!-- Adding TextBox Filter box-->
+<form asp-controller="Notes" asp-action="Index">
+    <div class="col-xs-4" style="float: left">
+        <input type="text" :" name="id" id="Id" />
+        <input type="submit" value="filter" />
+    </div>
+</form>
+<div class="row list-header">
+    <div class="col-xs-8"><h2>Notes</h2></div>
+    <div class="col-xs-4">
+        <a class="btn btn-primary" asp-action="Create"><span class="glyphicon glyphicon-plus"></span>New note</a>
+    </div>
+</div>
+@foreach (var item in Model)
+{
+    <div class="containerNote col-xs-6 col-md-3">
+        <div class="note">
+            <a id="deleteNote" asp-action="Delete" asp-route-id=@item.ID>
+                <span class="glyphicon glyphicon-remove"></span>
+            </a>
+            <a asp-action="Edit" asp-route-id=@item.ID>
+                <h3>@item.Title</h3>
+                <p>@item.Body</p>
+            </a>
+        </div>
+    </div>
+}
